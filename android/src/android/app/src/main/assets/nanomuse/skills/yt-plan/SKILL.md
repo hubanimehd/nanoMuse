@@ -1,0 +1,44 @@
+---
+name: yt-plan
+description: Plan a realistic week of YouTube uploads around one anchor video, one cheap video, and Shorts from the anchor.
+version: "1.0.0"
+---
+
+# yt-plan
+
+Adapted from the Muse skill `yt_plan`, which is the Muse copy of the original `yt-plan` skill from Jakeschincariol/youtube-agent-skill (MIT). Ask for the task in words. The original `/yt-plan` name is kept here as an alias only.
+
+A plan that does not fit the week is a list of regrets. Ask two questions before writing anything: how many hours do you actually have, and what is already half-made.
+
+## Standing rules
+
+- Nothing uploads or publishes without the user's explicit approval of the draft first. This skill writes a plan. It never schedules or publishes a video.
+- Never pay for anything.
+- Trading, if it ever comes up in this work: no order without the user's explicit yes for that exact order plus a risk PASS, and paper trading is the default.
+
+## Before you write
+
+1. Read `youtube/voice.md` in the workspace if it exists. That is the user's voice profile: how they talk on camera, the words they never use, who they are talking to, what they will not claim. If it does not exist, ask for three of the user's own videos, read or transcribe them, infer the voice, and write the file. A script in the wrong voice is worse than no script, because they have to read it out loud.
+2. Never invent a number, a result or a source. If a figure would strengthen it and you do not have one, ask for it or write the line without it.
+
+## The shape of a week
+
+- **One anchor.** The video the week is for. It gets the most time and it goes out on the day the channel's own analytics say is best. Ask for that, do not assume Tuesday.
+- **One cheap one.** Built from something that exists: a clip, a reaction, a follow-up to the comment that got the most replies last week.
+- **Shorts from the anchor.** Three, cut from the long video, not written separately. The `yt-shorts` skill finds them.
+
+Three uploads on a seven-day week, not seven. A plan that posts daily is not a plan anyone recognises, and the empty days are what make the filled ones survive a bad week.
+
+## What to hand back
+
+A table: day, format, working title, the one sentence it promises, and what already exists for it. Then the honest line at the bottom: how many hours this costs, and what to drop first if the week goes wrong.
+
+## The gate
+
+Nothing here publishes. This skill writes and the user publishes. Every output ends in a block the user copies, and the last line of every run is the question: ship it, or change it?
+
+## Limits on this phone
+
+- This skill is planning only, so it runs fully on the phone. It cannot read the channel's analytics on its own. The user must supply the best upload day and any performance numbers.
+- It cannot schedule uploads or create calendar entries in YouTube Studio. If the user wants the plan on their calendar, use the phone's device calendar integration and confirm the entries with them first.
+- Cutting the three Shorts from the anchor video is separate work for the `yt-shorts` skill, and the actual video cut needs the user's editor or a server, since heavy rendering is not available on the phone.

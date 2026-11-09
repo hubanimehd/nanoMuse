@@ -1179,6 +1179,23 @@ class SkillRepository(private val context: Context) {
             )
             Log.i(TAG, "Installed bundled skill: $bundledId (v$bundledVersion)")
         }
+
+        // nanoMuse: install the bundled skills from assets/nanomuse/skills/<name>/SKILL.md.
+        // One failure must not block the rest, and an already-installed or
+        // user-owned same-name skill is preserved, mirroring the creator guard above.
+        for (folder in io.github.nanomuse.skills.BundledSkills.list(context)) {
+            try {
+                val content = io.github.nanomuse.skills.BundledSkills.read(context, folder) ?: continue
+                val parsedSkill = parseSkillMd(content) ?: continue
+                val id = slugify(parsedSkill.name)
+                if (id.isBlank()) continue
+                if (_skills.value.any { it.id == id }) continue
+                val installed = importFromContent(content, ImportSource.BUNDLED)
+                if (installed != null) Log.i(TAG, "Installed bundled skill: ${installed.id}")
+            } catch (e: Exception) {
+                Log.w(TAG, "Bundled skill install failed for $folder: ${e.message}")
+            }
+        }
     }
 
     // -- Reload --
